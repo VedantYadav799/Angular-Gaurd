@@ -6,12 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactComponent } from './contact/contact.component';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthService } from './auth.service';
 
 const appRoute: Routes=[
-  {path:'', component:HomeComponent},
+  {path:'', component:HomeComponent} ,
   {path:'home', component:HomeComponent},
   {path:'about', component:AboutusComponent},
-  {path:'contact', component:ContactComponent}
+  {path:'privateInfo', component:ContactComponent, canActivate:[AppGuardService]}
 ]
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ const appRoute: Routes=[
     BrowserModule,
     RouterModule.forRoot(appRoute)
   ],
-  providers: [AppGuardService],
+  providers: [AppGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
